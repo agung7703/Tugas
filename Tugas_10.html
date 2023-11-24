@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Motor Selling</title>
+  </head>
+  <body>
+    <center>
+      <form name="form">
+        <script>
+          function proses1() {
+            var namapembeli = document.form.nmpembeli.value;
+            var jnsmtr = document.form.jenis.value;
+            var harga = 0;
+
+            // Validasi data / alert function
+            if (namapembeli === "" || jnsmtr === "pilih" || bln === "") {
+              alert("Mohon lengkapi semua data sebelum menekan tombol Proses.");
+              return;
+            }
+
+            // Menentukan harga berdasarkan jenis motor
+            if (jnsmtr === "hdbeat") {
+              harga = 10000000;
+              jnsmtr = "Honda Beat";
+            } else if (jnsmtr === "hdvario") {
+              harga = 18000000;
+              jnsmtr = "Honda Vario";
+            } else if (jnsmtr === "ymhnmax") {
+              harga = 25000000;
+              jnsmtr = "Yamaha Nmax";
+            } else if (jnsmtr === "ymhaerox") {
+              harga = 30000000;
+              jnsmtr = "Yamaha Aerox";
+            }
+
+            var bln = document.form.cicil.value;
+            var cclbln = harga / bln;
+
+            // Menampilkan hasil di input
+            document.form.namapembeli.value = namapembeli;
+            document.form.jnsmtr.value = jnsmtr;
+            document.form.harga.value = harga;
+            document.form.bln.value = bln;
+            document.form.cclbln.value = cclbln.toFixed(2);
+
+            // Menampilkan tabel cicilan
+            var table =
+              "<tr><td><center><strong>BULAN</strong></center></td><td><center><strong>CICILAN</strong></center></td></tr>";
+            for (var i = 1; i <= bln; i++) {
+              table +=
+                "<tr><td>" +
+                i +
+                "</td><td>Rp. " +
+                cclbln.toFixed(2) +
+                "</td></tr>";
+            }
+            document.getElementById("cicilanTable").innerHTML = table;
+
+            // Menyembunyikan hasil saat menekan button proses
+            document.getElementById("hasil").style.display = "block";
+          }
+
+          // Menyembunyikan hasil saat menekan tombol reset
+          function sembunyikanhasil() {
+            document.getElementById("hasil").style.display = "none";
+          }
+        </script>
+
+        <!-- Menyembunyikan tampilan -->
+        <style>
+          #hasil {
+            display: none;
+          }
+          ::-webkit-scrollbar {
+            width: 5px;
+          }
+          ::-webkit-scrollbar-track {
+            background: rgba(12, 12, 128, 0.302);
+            border-radius: 100vw;
+          }
+          ::-webkit-scrollbar-thumb {
+            background: rgb(65, 65, 71);
+            border-radius: 100vw;
+          }
+          ::-webkit-scrollbar-thumb:hover {
+            background: rgba(241, 9, 9, 0);
+          }
+        </style>
+
+        <div>
+          <h1>PROGRAM PENJUALAN MOTOR</h1>
+          <hr />
+          <table>
+            <tr>
+              <td>NAMA PEMBELI :</td>
+              <td><input type="text" name="nmpembeli" size="20" /></td>
+            </tr>
+            <tr>
+              <td>JENIS MOTOR</td>
+              <td>
+                <select name="jenis">
+                  <option value="pilih">
+                    <strong>- PILIH JENIS -</strong>
+                  </option>
+                  <option value="hdbeat">Honda Beat</option>
+                  <option value="hdvario">Honda Vario</option>
+                  <option value="ymhnmax">Yamaha Nmax</option>
+                  <option value="ymhaerox">Yamaha Aerox</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2"><hr /></td>
+            </tr>
+            <tr>
+              <td>LAMA CICILAN:</td>
+              <td>
+                <input type="radio" name="cicil" value="12" /><strong
+                  >12</strong
+                >
+                <input type="radio" name="cicil" value="18" /><strong
+                  >18</strong
+                >
+                <input type="radio" name="cicil" value="24" /><strong
+                  >24 (Bulan)</strong
+                >
+              </td>
+            </tr>
+          </table>
+          <hr />
+          <input type="button" value="Proses" onclick="proses1()" />
+          <input type="reset" value="Reset" onclick="sembunyikanhasil()" />
+        </div>
+
+        <div id="hasil">
+          <br />
+          <br />
+          <hr />
+          <h1>PROGRAM PENJUALAN MOTOR</h1>
+          <hr />
+          <br />
+          <table>
+            <tr>
+              <td>Nama Pembeli</td>
+              <td>: <input name="namapembeli" size="10" /></td>
+            </tr>
+            <tr>
+              <td>Jenis Motor</td>
+              <td>: <input name="jnsmtr" size="10" /></td>
+            </tr>
+            <tr>
+              <td>Harga</td>
+              <td>: Rp. <input name="harga" size="10" /></td>
+            </tr>
+            <tr>
+              <td>Lama Cicilan</td>
+              <td>: <input name="bln" id="" size="5" /> Bulan</td>
+            </tr>
+            <tr>
+              <td>Cicilan Perbulan</td>
+              <td>: Rp. <input name="cclbln" id="" size="10" /></td>
+            </tr>
+          </table>
+          <table id="cicilanTable"></table>
+          <br /><br /><br /><br /><br /><br />
+          <p>&copy;<strong>Mr. A</strong></p>
+        </div>
+      </form>
+    </center>
+  </body>
+</html>
